@@ -1,8 +1,12 @@
-#ifndef GAME_CLASSES_H
-#define GAME_CLASSES_H
+#ifndef GAME_CLASSES_HPP
+#define GAME_CLASSES_HPP
 
 #include <iostream>
 #include <string>
+#include <windows.h> 
+#include <cstdlib>   
+#include <ctime>
+
 using namespace std;
 
 
@@ -67,4 +71,9 @@ class Skeleton : public Enemy{
         Skeleton();
 };
 
-#endif // GAME_CLASSES_H
+class Dummy : public Enemy{
+    public:
+        Dummy();
+};
+
+#endif // GAME_CLASSES_HPP

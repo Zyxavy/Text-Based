@@ -1,56 +1,5 @@
-#include <iostream>
-#include "game_classes.h"
 #include "gameClasses.cpp"
-#include <windows.h> 
-#include <cstdlib>   
-#include <ctime>
-
-using std::cout;
-using std::cin;
-using std::string;
-using std::endl;
-
-
-void battle(Player &player, Enemy &enemy);
-void performAttack(Player &player, Enemy &enemy);
-void selectHero(Player *&player);
-void inventory(Player &player);
-string createHealthBar(int currentHealth, int maxHP, int barLength = 10);
-void defend(Player &player, Enemy &enemy);
-string items(Player &player);
-void getExp(Player &player, Enemy &enemy);
-string expBar(int levelPoints, int barLength = 10);
-void coinDrop(Player &player, Enemy enemy);
-void hpDrop(Player &player, Enemy &enemy);
-
-
-int main(){
-    Player *chosenHero;
-    Goblin goblin;
-    Witch witch;
-    WereWolf wereWolf;
-    Skeleton skeleton;
-
-        //Scene1
-        int scene1 = 2;
-    do{
-        scene1 = 2;
-        selectHero(chosenHero);
-        cout << "Continue?: 1: yes | 2. no: ";
-        cin >> scene1;
-        if(!scene1) scene1 = 2;
-    } while(scene1 != 1);
-
-
-    battle(*chosenHero, goblin);
-    battle(*chosenHero, witch);
-    chosenHero->levelPoints += 100;
-    battle(*chosenHero, wereWolf);
-    battle(*chosenHero, skeleton);
-
-    delete chosenHero;
-    return 0;
-} 
+#include "gameFunctions.hpp"
 
 void hpDrop(Player &player, Enemy &enemy){
     srand(time(0));
@@ -148,7 +97,7 @@ void selectHero(Player *&player){
  |    , ``  (\/  /_                   / /  |  \ \                           |_|          /  |
   \,.->._    \X-=/^                  / .   .   . \                         /  )          '-'
   (  /   `-._//^`                   /   .     .   \                       (__/"
-   `Y-.____(__}                    /   /   |   \   \    
+   `Y-.____(__}                    /   /   |      \    
     )" << endl;
 
         cout <<  " 1. Knight  |  2. Wizard  |  3. Thief :";
@@ -379,6 +328,8 @@ void inventory(Player &player){
             case 2:
                 // inventory
                 break;
+            case 3:
+                break;
             default:
                 cout << "Invalid!\n";
                 cin.clear();
@@ -438,6 +389,5 @@ void defend(Player &player, Enemy &enemy){
             }
 }
 
-string items(Player &player){
-    return 0;
-}
+
+

@@ -1,5 +1,4 @@
-#include "game_classes.h"
-
+#include "game_classes.hpp"
 
 Knight::Knight(){
   maxHealth = 120;
@@ -82,7 +81,7 @@ Thief::Thief(){
                        _/_    _/                           
                    __.'  / '   `-.__                       
                   / <.--'           `\                     
-                 /   \   \c           |                    
+                 /   \   \c           |                
                 /    /    )  GoT  x    \                   
                 |   /\    |c     / \.-  \                  
                 \__/  )  /(     (   \   <>'\               
@@ -250,4 +249,25 @@ Skeleton::Skeleton(){
                                              |  \
                                              |lllj
                                              |||||)";
+}
+
+Dummy::Dummy(){
+  difficulty = 1;
+  exp = 0;
+  maxHealth = 999999999;
+  currentHealth = 999999999;
+  damage = 10;
+  defense = 999999999;
+  speed = 0;
+  name = "Training Dummy";
+  type = "Melee";
+  art = R"(
+         &&&
+        (+.+)
+      ___\=/___
+     (|_ ~~~ _|)
+        |___|
+        / _ \
+       /_/ \_\
+      /_)   (_\)";
 }
