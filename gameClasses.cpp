@@ -1,14 +1,40 @@
-#include "game_classes.hpp"
+#include "game.hpp"
+
+//Global Variables
+int Goblin::baseDamage = 20;
+int Goblin::baseHealth = 100;
+int Goblin::baseDefense = 15;
+int Goblin::baseSpeed = 15;
+int Goblin::baseExp = 20;
+
+int Witch::baseDamage = 34;
+int Witch::baseHealth = 100;
+int Witch::baseDefense = 10;
+int Witch::baseSpeed = 12;
+int Witch::baseExp = 30;
+
+int WereWolf::baseDamage = 25;
+int WereWolf::baseHealth = 130;
+int WereWolf::baseDefense = 35;
+int WereWolf::baseSpeed = 10;
+int WereWolf::baseExp = 39;
+
+int Skeleton::baseDamage = 30;
+int Skeleton::baseHealth = 125;
+int Skeleton::baseDefense = 25;
+int Skeleton::baseSpeed = 20;
+int Skeleton::baseExp = 65;
+
 
 Knight::Knight(){
   maxHealth = 120;
-  currentHealth = 120;
-    damage = 27;
-    defense = 65;
-    speed = 15;
-    type = "Strength";
-    name = "Knight";
-     art = R"(
+  currentHealth = 125;
+  damage = 28;
+  defense = 75;
+  speed = 15;
+  type = "Strength";
+  name = "Knight";
+  art = R"(
               _,.
             ,` -.)
            ( _/-\\-._
@@ -34,7 +60,7 @@ Knight::Knight(){
 Wizard::Wizard() {
   maxHealth = 100;
   currentHealth = 100;
-    damage = 50;
+    damage = 55;
     defense = 18;
     speed = 24;
     type = "Magic";
@@ -67,9 +93,9 @@ Wizard::Wizard() {
 Thief::Thief(){
   maxHealth = 110;
   currentHealth = 110;
-    damage = 41;
+    damage = 43;
     defense = 28;
-    speed = 38;
+    speed = 50;
     type = "Phantom";
     name = "Thief";
     art = R"(
@@ -102,75 +128,117 @@ Thief::Thief(){
 }
 
 Goblin::Goblin(){
-  difficulty = 2;
-  exp = 20;
-  maxHealth = 100;
-  currentHealth = 100;
-  damage = 20;
-  defense = 15;
-  speed = 17;
+  difficulty = 1;
+  exp = baseExp;
+  maxHealth = baseHealth;
+  currentHealth = maxHealth;
+  damage = baseDamage;
+  defense = baseDefense;
+  speed = baseSpeed;
   name = "Goblin";
   type = "Phantom"; 
+  weakness = "TotemOfDagrash";
   art = R"(
-            /(.-""-.)\
-        |\  \/      \/  /|
-        | \ / =.  .= \ / |
-        \( \   o\/o   / )/
-         \_, '-/  \-' ,_/
-           /   \__/   \
-           \ \__/\__/ /
-         ___\ \|--|/ /___
-       /`    \      /    `\
-      /       '----'       \
+                         :                 :-       
+     -::             +::=:-=:          ::::         
+      --:::       *+=-:::-::-###   -:::==+          
+       ::--::::*#+*+=::::::-=+*##+=-*=++            
+          ::++-:+*+++-::::--=**#%@++=*              
+           :::+*-==:::::==++***::+#-=               
+            :::+*=-:-:-::::::--=#=@=                
+            :::=+==:::::::::::::::=                 
+               **+--=:::::::::::++# :--::::::--=    
+        :::::::-+*+-:**-:-----%%=##::::::::::::-+=  
+:::-++=***-=:-:-#**#*-:=**+%%=-=*+#*%%#=++*++=*+:=+=
++**+-%%#**===  -*=%%@%%*-::-=== # =:                
+        =::+=--:::==%#+*%%##%*::::-::               
+        *=::::::+=#-**-::::=%+::::--=               
+        *+--+=-+####@%-::-:+*%+*#--:+               
+          %#::    %%%==+++**#@@ -::*=               
+            ::    *@%#%#%+*=##-=-:+:                
+                 :-*##@+%+*@@@****                  
+               *+#%%+**=:-**@@@#+                   
+            +***+-*%+---:=*+**#@@#:                 
+            **::+@#*+=-%+#*+++==#@@                 
+           =+--**##=-=#%*##*##*+::#@                
+            +#=::--%+#-:+%%#@#*::::*#-              
+           - #--=-# @%*-:=*%@%#*:+++*               
+            :==+=** =@#+-=+%  @*=-:=*               
+            -====#*  @::-=*=  *+-==+%               
+            -*==*%%     =*%   #*===+#               
+            =*++**#     +*     %+===*+              
+          =++==+##@      %    #*#*==++==-*#         
+       #*=====+##              %@@+%#*=*#@@         
+        @@@@@%%                                  
 )";
+
+
 }
 
 Witch::Witch(){
   difficulty = 2;
-  exp = 30;
-  maxHealth = 100;
-  currentHealth = 100;
-  damage = 27;
-  defense = 10;
-  speed = 12;
+  exp = baseExp;
+  maxHealth = baseHealth;
+  currentHealth = maxHealth;
+  damage = baseDamage;
+  defense = baseDefense;
+  speed = baseSpeed;
   name = "Witch";
   type = "Magic";
+  weakness = ' ';
   art = R"(
-                                       __,,,
-                                 _.--'    /
-                              .-'        /
-                            .'          |
-                          .'           /
-                         /_____________|
-                       /`~~~~~~~~~~~~~~/
-                     /`               /
-      ____,....----'/_________________|---....,___
-,--""`             `~~~~~~~~~~~~~~~~~~`           `""--,
-`'----------------.----,------------------------,-------'`
-               _,'.--. \                         \
-             .'  (o   ) \                        |
-            c   , '--'  |                        /
-           /    )'-.    \                       /
-          |  .-;        \                       |
-          \_/  |___,'    |                    .-'
-         .---.___|_      |                   /
-        (          `     |               .--'
-         '.         __,-'\             .'
-           `'-----'`      \        __.'
-                           `-..--'`
+           @###@                               
+            @#[[{#                           
+              @#]<<]}#%@                     
+                 #}<+[#%@                    
+                  }{}({#@@                   
+       }#         @#}{#%@@@                  
+       ]}         %{#%#%@@@@  @    @@        
+       }#          @@@%%%%#{}(<)(]}#@@       
+       @@@ @@@@#[(>^*++=====++++++^<(}       
+        @@@@{])^++++=~--...:~=++++*<]        
+        #({[)<*++++++:.......=+++>(          
+        #([[]<*+++**+:.......+<(             
+         <-  [)<^*<}(+-:...:~+(              
+         >=     ]=~-~}(++=++[{               
+        }[*~  ^>+~~+=~~^}]<+~+               
+        #)>]+{#](=>+}++=~=<)[[               
+        #}[*+@@#{)][~#][}[<{]){              
+        @%{))@%%{%%}<^[][{}<[%@              
+       @}@}[[+]}]%%[{(}}){[#@@@              
+         @}]@#}#@###{###%%%@%][]             
+        @@%[@@@@@{}{######@@%)=~:--:     ~>(#
+       @@@#}@@@@%#}]{}}{#%@@@@%##[<~~===]<(]>
+      %@%{@#%@@@%%}[]{[###%@@%%#{%%{%)(%%[#{[
+    ##%{{@@##@@@##}}[}}{%%#%%@ @*+-)]>)[  %  
+  [}{%{{~~}##@@@{#{[#[}}@{%%%%@              
+ []~:-#)(^[@{@@@#%%%{#{{%{%%@%@@             
+  @%#@@ #{@@{%@@#@@#@##{#%%%@@@@             
+    @@@ #@@@}@@%@@@@{@%%#@#@%@@@@            
+  @@@@@{@@%@[[@%@@@@#%@@#@%@%@@@@            
+  @)<@% @@#[(]}%@%@%@%@@%@%@@@@@@@           
+  @@@##@@@}]]]]}@@@%@%@@@@@@@@@@@@           
+ @(.[@ @@}{[[}{{}@@@@@@@@@@@@@@@@@@          
+%]#@@  @**(}}}]}[@@@%@@@@@@@@@@@@@@          
+        %{{{{{}}{#@@@@@@@@@@@@@@@@@          
+        {{{#{{}}}{@@@@@@@@@@@@@@@@@@         
+        }#{#{#{}{#@@@@@@@@@@@@@@@@@@         
+        {{((}#[[%%@@@@@@@@@@@@@@@@@          
+                 @@@ @@@@@@@ @@                      
 )";
 }
 
 WereWolf::WereWolf(){
   difficulty = 3;
-  exp = 34;
-  maxHealth = 130;
-  currentHealth = 130;
-  damage = 14;
-  defense = 30;
-  speed = 7;
+  exp = baseExp;
+  maxHealth = baseHealth;
+  currentHealth = maxHealth;
+  damage = baseDamage;
+  defense = baseDefense;
+  speed = baseSpeed;
   name = "WereWolf";
   type = "Melee";
+  weakness = ' ';
   art = R"(
                    @@%%               
                  @@@  @@:              
@@ -202,14 +270,15 @@ WereWolf::WereWolf(){
 
 Skeleton::Skeleton(){
   difficulty = 4;
-  exp = 50;
-  maxHealth = 120;
-  currentHealth = 120;
-  damage = 20;
-  defense = 23;
-  speed = 20;
+  exp = baseExp;
+  maxHealth = baseHealth;
+  currentHealth = maxHealth;
+  damage = baseDamage;
+  defense = baseDefense;
+  speed = baseSpeed;
   name = "Skeleton";
   type = "Melee";
+  weakness = ' ';
   art = R"(
                               _.--""-._
   .                         ."         ".
@@ -252,12 +321,11 @@ Skeleton::Skeleton(){
 }
 
 Dummy::Dummy(){
-  difficulty = 1;
   exp = 0;
-  maxHealth = 999999999;
-  currentHealth = 999999999;
+  maxHealth = 1000000;
+  currentHealth = 1000000;
   damage = 10;
-  defense = 999999999;
+  defense = 0;
   speed = 0;
   name = "Training Dummy";
   type = "Melee";

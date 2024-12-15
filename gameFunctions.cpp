@@ -1,5 +1,5 @@
 #include "gameClasses.cpp"
-#include "gameFunctions.hpp"
+
 
 void hpDrop(Player &player, Enemy &enemy){
     srand(time(0));
@@ -18,10 +18,8 @@ void coinDrop(Player &player, Enemy enemy){
     player.coins += coins;
         
     cout << enemy.name << " dropped " << coins << " coins!\n";
-    do{
-        cout << "Continue? 1.Yes: ";
-        cin >> act;
-    } while(act != 1);
+    cout << "Enter any key to continue: ";
+    cin >> act;
  
 }
 
@@ -143,9 +141,10 @@ void selectHero(Player *&player){
 
 void performAttack(Player &player, Enemy &enemy){
     int damage = player.damage - enemy.defense/10;
-    if(damage < 0){
-        damage = 0;
-    }
+
+    if(damage < 0) {damage = 0;}
+    if(enemy.weakness == "TotemOfDagrash" && TotemOfDagrash == true) {damage += 20;}
+
     enemy.currentHealth -= damage;
     cout << player.name << " attacks the " << enemy.name << "!\n";
     Sleep(500);
@@ -168,19 +167,20 @@ void enemyAttack(Enemy &enemy, Player &player){
 void battle(Player &player, Enemy &enemy) {
     int action, damage;
     srand(time(NULL));
-    cout << player.art << '\n' << R"(
+    cout << player.art << "      " << R"(
   __      ________ _____   _____ _    _  _____ 
  \ \    / /|  ____|  __ \ / ____| |  | |/ ____|
   \ \  / / | |__  | |__) | (___ | |  | | (___  
    \ \/ /  |  __| |  _  / \___ \| |  | |\___ \ 
     \  /   | |____| | \ \ ____) | |__| |____) |
      \/    |______|_|  \_|_____/ \____/|_____/ )"
-    << '\n' << enemy.art; 
+    << "    " << enemy.art; 
 
     Sleep(500);
     cout << player.name << " Encountered a " << enemy.name << endl;
     while(player.currentHealth > 0 && enemy.currentHealth > 0)
     {
+ 
         cout << player.name << " Health: " << createHealthBar(player.getHealth(), player.getMaxHealth()) << '\n';
         cout << enemy.name << " Health: " << createHealthBar(enemy.getHealth(), enemy.getMaxHealth()) << '\n';
         cout << "______________________________________________________________________\n";
@@ -389,5 +389,28 @@ void defend(Player &player, Enemy &enemy){
             }
 }
 
+void typeWriterEffect(const std::string& text, int delay) {
+    for (char c : text) {
+        cout << c << flush;  // Print each character and flush the output
+        std::this_thread::sleep_for(std::chrono::milliseconds(delay));  // Pause for the specified duration
+    }
+    cout << endl;  
+}
 
+void increaseDmgOfEnemies(){
+    Goblin::baseDamage += 15;  // Permanently increases base damage for all future Goblin instances
+    Witch::baseDamage += 13;
+    WereWolf::baseDamage += 17;
+    Skeleton::baseDamage += 10;
+}
 
+void setupConsoleWindow() {
+    SetConsoleTitleA("RPGAME");
+
+    HWND console = GetConsoleWindow();
+    RECT ConsoleRect;
+    GetWindowRect(console, &ConsoleRect);
+    
+    // Resize window
+    MoveWindow(console, ConsoleRect.left, ConsoleRect.top, 1500, 1000, TRUE);
+}

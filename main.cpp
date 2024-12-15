@@ -5,9 +5,12 @@ Dummy test1;
 
 int main(){
 
+    setupConsoleWindow();
+
     //Scene1
-        int scene1 = 2;
-        int tutor;
+    int scene1 = 2;
+    int tutor;
+
     do{
         scene1 = 2;
         selectHero(chosenHero);
@@ -16,16 +19,22 @@ int main(){
         if(!scene1) scene1 = 2;
     } while(scene1 != 1);
 
-    cout << "Enter the tutorial?\n" << "1.YES!  |  2. NO!\n:";
+    cout << "\n\nEnter the tutorial?\n" << "1.YES!  |  2. NO!\n:";
     cin >> tutor;
 
-    tutor == 1? tutorial(*chosenHero, test1) :
-
+    if(tutor == 1) {battle(*chosenHero, test1);}
+    Goblin goblin;
+    Witch witch;
+    battle(*chosenHero, witch);
+   
     Sleep(1000);
     scene2();
     scene3();
 
+    system("pause");
 
     delete chosenHero;
     return 0;
 } 
+
+
