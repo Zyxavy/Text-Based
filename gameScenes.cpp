@@ -7,7 +7,7 @@ Player *chosenHero;
 //Skeleton skeleton;
 
 //declarations
-void scene3A();
+    void scene3A();
 
 void tutorial(Player &player, Enemy &enemy){
     int action;
@@ -90,8 +90,9 @@ void tutorial(Player &player, Enemy &enemy){
     player.hpPotion += 4;
 }
 
-
 void scene2(){
+    playMusic(L"Music/forestBGM.wav");
+    onScene = true;
     char act;
     int delay = 10;
 
@@ -113,6 +114,8 @@ void scene2(){
 }
 
 void scene3(){
+    playMusic(L"Music/forestBGM.wav");
+    onScene = true;
     int act;
     int delay = 10;
     Goblin goblin1;
@@ -141,6 +144,7 @@ void scene3(){
 
         switch(act){
             case 1:
+                onScene = false;
                 cout << "\n\n\n\n\n\n________________________________________________________________________________________________________________________\n\n";
                 typeWriterEffect(story2, delay);
                 Sleep(1000);
@@ -161,6 +165,8 @@ void scene3(){
 
                 typeWriterEffect(story6, delay);
                 Sleep(500);
+                onBattle = false;
+                playMusic(L"Music/forestBGM.wav");
 
                 typeWriterEffect(story7, delay);
                 cout << "What will the hero do?\n" << "1. Help the village  |  2. Continue on your journey\n:";
@@ -170,12 +176,13 @@ void scene3(){
                 break;
 
             case 2:
+                char key;
                 cout << "\n\n\n\n\n\n________________________________________________________________________________________________________________________\n\n";
                 typeWriterEffect(story8, delay);
                 Sleep(1000);
                 typeWriterEffect(story9, delay);
                 cout << "Enter any key to continue: ";
-                cin >> act;
+                cin >> key;
                 break;
             default:
                 cout << "Invalid operation, try again!\n";
@@ -186,6 +193,7 @@ void scene3(){
 }
 
 void scene3A(){
+    onScene = true;
     char act;
     int delay = 10;
 
@@ -201,6 +209,7 @@ void scene3A(){
     string story6 = "Villager: Thank the heavens you're here. I saw you coming from the woods and knew you'd be strong enough to help us. Here, " 
                     "take this healing potionand a vial of Goblin Repellent Oil. It weakens their armor!\n\n";
 
+    onScene = false;
     cout << "\n\n\n\n\n\n________________________________________________________________________________________________________________________\n\n";
     typeWriterEffect(story1, delay);
     Sleep(1000);
@@ -211,6 +220,9 @@ void scene3A(){
     typeWriterEffect(story3, delay);
     Sleep(1000);
     battle(*chosenHero, goblin1);
+    onBattle = false;
+    
+    
     Sleep(1000);
 
    typeWriterEffect(story4, delay);

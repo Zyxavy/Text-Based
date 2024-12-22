@@ -13,7 +13,8 @@
 using namespace std;
 
 //Global Variables
-
+    bool onBattle = false;
+    bool onScene = false;
 //items
     bool TotemOfDagrash = false; 
 
@@ -127,5 +128,7 @@ void tutorial(Player &player, Enemy &enemy);
 void typeWriterEffect(const std::string &text, int delay);
 void increaseDmgOfEnemies(Enemy &enemy);
 void setupConsoleWindow();
+int playMusic(const std::wstring& musicFile);
+void playBattleMusic();
 
 #endif // GAME_HPP

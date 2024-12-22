@@ -1,6 +1,5 @@
 #include "gameClasses.cpp"
 
-
 void hpDrop(Player &player, Enemy &enemy){
     srand(time(0));
     if(rand() % 2 == 0){
@@ -165,8 +164,13 @@ void enemyAttack(Enemy &enemy, Player &player){
 }
 
 void battle(Player &player, Enemy &enemy) {
+    if(onBattle == false) {playBattleMusic();}
     int action, damage;
+    onBattle = true;
+
+
     srand(time(NULL));
+
     cout << player.art << "      " << R"(
   __      ________ _____   _____ _    _  _____ 
  \ \    / /|  ____|  __ \ / ____| |  | |/ ____|
@@ -264,7 +268,10 @@ void battle(Player &player, Enemy &enemy) {
             cin.ignore(123, '\n');
             break;
         }
+        cin.clear();
+        cin.ignore(123, '\n');
     }
+
 }
 
 string createHealthBar(int currentHealth, int maxHP, int barLength){
@@ -413,4 +420,27 @@ void setupConsoleWindow() {
     
     // Resize window
     MoveWindow(console, ConsoleRect.left, ConsoleRect.top, 1500, 1000, TRUE);
+}
+
+int playMusic(const std::wstring& musicFile) {
+
+    if(onScene == true && onBattle == false) { return 1;}
+
+    PlaySoundW(NULL, NULL, 0);
+    
+    if (!PlaySoundW(musicFile.c_str(), NULL, SND_FILENAME | SND_ASYNC)) {
+        std::wcerr << L"Error: Could not play " << musicFile << std::endl;
+    } 
+
+    return 0;
+}
+
+void playBattleMusic(){
+
+    PlaySoundW(NULL, NULL, 0);
+
+    if (!PlaySoundW(L"Music/battleBGM.wav", NULL, SND_FILENAME | SND_ASYNC)) {
+        std::wcerr << L"Error: Could not play " << std::endl;
+    } 
+
 }
