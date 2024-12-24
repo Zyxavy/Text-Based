@@ -14,7 +14,6 @@ int main(){
 
 
     do{
-        
         scene1 = 2;
         selectHero(chosenHero);
         cout << "\n\nContinue?: 1: yes | 2. no: ";
@@ -29,7 +28,6 @@ int main(){
     if(tutor == 1) {tutorial(*chosenHero, test1);}
    
     Sleep(1000);
-    playMusic(L"Music/forestBGM.wav");
     scene2();
     scene3();
 

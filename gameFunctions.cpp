@@ -142,7 +142,7 @@ void performAttack(Player &player, Enemy &enemy){
     int damage = player.damage - enemy.defense/10;
 
     if(damage < 0) {damage = 0;}
-    if(enemy.weakness == "TotemOfDagrash" && TotemOfDagrash == true) {damage += 20;}
+    if(enemy.weakness == "TotemOfDagrash" && TotemOfDagrash == true) {damage += 20;} // Goblin weakness
 
     enemy.currentHealth -= damage;
     cout << player.name << " attacks the " << enemy.name << "!\n";
@@ -242,6 +242,11 @@ void battle(Player &player, Enemy &enemy) {
                 inventory(player);
             break;
         case 4:
+            if(enemy.difficulty == 6) {
+                cout << "Cannot run away from Boss monster!\n";
+                break;
+            }
+
             if(rand() % 100 < 30 == 0){ // 30% chance of running away
                 cout << "Successully ran away!\n";
                 Sleep(700);
@@ -305,7 +310,9 @@ void inventory(Player &player){
     do{
         cout << "Health: " << "\t\t" << createHealthBar(player.getHealth(), player.getMaxHealth()) << "\n";
         cout << "Experience: " << "\t\t" << expBar(player.levelPoints) << '\n';
+        cout << "Level: " << player.level << "\n";
         cout << "Coins: " << player.coins << "\n";
+        cout << "Current Hp potions: " << player.hpPotion << "\n";
 
         cout << "1.HEAl  | 2. ITEMS  | 3.Exit| \n";
         cin >> action;
@@ -320,7 +327,7 @@ void inventory(Player &player){
                     }
 
                     if(player.hpPotion > 0) {
-                        int hp = rand() % 30 + 1;
+                        int hp = (rand() % 30 + 1) + 10;
                         player.currentHealth += hp;
                         player.hpPotion --;
                         cout << "Drinking...\n";
@@ -333,7 +340,11 @@ void inventory(Player &player){
                     }
                 break;
             case 2:
-                // inventory
+                char ext;
+                if(TotemOfDagrash == true){ cout << " | Totem of Dagrash | Provides bonus damage to Goblin type enemies.\n";}
+
+                cout << "\n\nEnter any key to exit: ";
+                cin >> ext;
                 break;
             case 3:
                 break;
@@ -356,7 +367,7 @@ void defend(Player &player, Enemy &enemy){
      if(rand() % 100 < 50 == 0){ // check if defended
                 cout << "Defended Successfully!\n";
                 Sleep(500);
-                damage = rand() % enemy.damage - player.defense/10;
+                damage = 0;
 
                 if(damage < 0){
                     damage = 0;
@@ -412,7 +423,7 @@ void increaseDmgOfEnemies(){
 }
 
 void setupConsoleWindow() {
-    SetConsoleTitleA("RPGAME");
+    SetConsoleTitleA("RP-GAME");
 
     HWND console = GetConsoleWindow();
     RECT ConsoleRect;
@@ -424,7 +435,7 @@ void setupConsoleWindow() {
 
 int playMusic(const std::wstring& musicFile) {
 
-    if(onScene == true && onBattle == false) { return 1;}
+    if(onScene == true && onBattle == true) { return 1;}
 
     PlaySoundW(NULL, NULL, 0);
     
@@ -437,7 +448,7 @@ int playMusic(const std::wstring& musicFile) {
 
 void playBattleMusic(){
 
-    PlaySoundW(NULL, NULL, 0);
+    PlaySoundW(NULL, NULL, 0); // stop music
 
     if (!PlaySoundW(L"Music/battleBGM.wav", NULL, SND_FILENAME | SND_ASYNC)) {
         std::wcerr << L"Error: Could not play " << std::endl;

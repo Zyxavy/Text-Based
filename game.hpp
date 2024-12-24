@@ -112,6 +112,17 @@ class Dummy : public Enemy{
         Dummy();
 };
 
+//Boss Types
+class Ogre : public Enemy{
+    public:
+        Ogre();
+};
+
+class InjuredOgre : public Enemy{
+    public:
+        InjuredOgre();
+};
+
 //functions
 void battle(Player &player, Enemy &enemy);
 void performAttack(Player &player, Enemy &enemy);
